@@ -2,12 +2,12 @@ class Solution {
 
     public int numWaterBottles(int numBottles, int numExchange) {
 
-        int totalDrank = 0;
+       /* int totalDrank = 0;
 
         int emptyBottles = 0;
 
         // Continue while full bottles exist
-        while(numBottles > 0) {
+        while(numBottles > 0) {//TIME COMPLEXITY:O(log n)
 
             // Drink current full bottles
             totalDrank += numBottles;
@@ -23,5 +23,11 @@ class Solution {
         }
 
         return totalDrank;
+    }
+}*/
+
+
+//OPTMIZED APPROACH:O(1)
+return numBottles + (numBottles-1)/(numExchange-1);
     }
 }
