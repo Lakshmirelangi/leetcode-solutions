@@ -1,29 +1,14 @@
 class Solution:
-    def maxVowels(self, s, k):
-        vowels = set("aeiou")
+    def maxVowels(self, s: str, k: int) -> int:
+        answer = 0
+        for i in range(0, len(s)-k+1):
+            temp = 0
+            sub_str = s[i:i+k]
+            temp += sub_str.count('a')
+            temp += sub_str.count('e')
+            temp += sub_str.count('i')
+            temp += sub_str.count('o')
+            temp += sub_str.count('u')
 
-        count = 0
-
-        # Create the first window
-        for i in range(k):
-            if s[i] in vowels:
-                count += 1
-
-        max_count = count
-
-        # Slide the window
-        for right in range(k, len(s)):
-
-            # Add the new character
-            if s[right] in vowels:
-                count += 1
-
-            # Remove the old character
-            left = right - k
-
-            if s[left] in vowels:
-                count -= 1
-
-            max_count = max(max_count, count)
-
-        return max_count
+            answer = max(temp, answer)
+        return answer
