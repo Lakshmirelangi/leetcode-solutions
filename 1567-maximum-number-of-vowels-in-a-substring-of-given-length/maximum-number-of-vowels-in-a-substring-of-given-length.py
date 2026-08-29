@@ -1,33 +1,29 @@
-class Solution(object):
+class Solution:
     def maxVowels(self, s, k):
-        """
-        :type s: str
-        :type k: int
-        :rtype: int
-        """
-        currWindow, currLen, currVowelCount = [], 0, 0
-        left = 0
-        n = len(s)
-        vowels = "AEIOUaeiou"
-        ret = 0
+        vowels = set("aeiou")
 
-        for right in range(n):
-            letter = s[right]
-            currWindow.append(letter)
-            currLen += 1
-            if letter in vowels:
-                currVowelCount += 1
-            
-            while currLen > k:
-                removedLetter = s[left]
-                currWindow.remove(removedLetter)
-                currLen -= 1
-                if removedLetter in vowels:
-                    currVowelCount -= 1
-                left += 1
-            
-            # at this point satisfy the condition
-            if currLen == k:
-                ret = max(ret, currVowelCount)
-        
-        return ret
+        count = 0
+
+        # Create the first window
+        for i in range(k):
+            if s[i] in vowels:
+                count += 1
+
+        max_count = count
+
+        # Slide the window
+        for right in range(k, len(s)):
+
+            # Add the new character
+            if s[right] in vowels:
+                count += 1
+
+            # Remove the old character
+            left = right - k
+
+            if s[left] in vowels:
+                count -= 1
+
+            max_count = max(max_count, count)
+
+        return max_count
