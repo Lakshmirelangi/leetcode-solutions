@@ -1,16 +1,14 @@
 class Solution:
     def reverseList(self, head):
-        # Base case
-        if head is None or head.next is None:
-            return head
 
-        # Reverse the remaining list
-        new_head = self.reverseList(head.next)
+        prev = None
+        curr = head
 
-        # Put current node after the next node
-        head.next.next = head
+        while curr != None:
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next
 
-        # Break the old connection
-        head.next = None
+        return prev
 
-        return new_head
